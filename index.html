@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hành trình của thức ăn – Hệ tiêu hóa người</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap">
+<style>
+:root{--c1:#e5484d;--c2:#ee6f9b;--c3:#f59a2e;--c4:#e8b800;--c5:#a8683a;--c6:#7b61c9;--ink:#1d2b3a;color-scheme:light;box-sizing:border-box}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:"Be Vietnam Pro",system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 50% 45%,#fff 0,#eaf3fa 60%,#d9e8f3 100%);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.app{min-height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;padding:10px 22px 10px;gap:8px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(24px,4.4vh,44px);font-weight:800;line-height:1.1;background:linear-gradient(90deg,var(--c1),var(--c3),var(--c4),var(--c5),var(--c6));-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{margin:2px 0 0;font-size:clamp(12px,2vh,18px);color:#4d6177}
+.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ctrl button{font:inherit;font-weight:600;font-size:13px;border:0;border-radius:99px;padding:8px 14px;background:var(--ink);color:#fff;cursor:pointer}
+#st{font-weight:700;font-size:13px;padding:8px 14px;border-radius:99px;background:#fff;border:2px solid #cfdeea}
+button:focus-visible,.card:focus-visible{outline:3px solid #2b7de9;outline-offset:2px}
+main{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:18px;min-height:0;align-items:stretch}
+.col{display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;min-height:0}
+.card{--c:#999;background:#ffffffd9;backdrop-filter:blur(8px);animation:in .7s backwards;animation-delay:calc(var(--o)*.09s);border-radius:14px;border-left:7px solid var(--c);padding:10px 14px;box-shadow:0 2px 10px #1d2b3a1c;cursor:pointer;transition:transform .3s,box-shadow .3s;font-size:clamp(11px,1.75vh,15px)}
+.card.on{transform:scale(1.04);box-shadow:0 8px 24px color-mix(in srgb,var(--c) 50%,transparent)}
+.card h3{margin:0 0 4px;font-size:1.08em;display:flex;gap:8px;align-items:center}
+.num{flex:none;width:1.9em;height:1.9em;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:800}
+.card ul{margin:0;padding-left:1.2em;line-height:1.4}
+svg.body{height:100%;width:auto;aspect-ratio:330/552;max-width:100%;display:block}
+.org{transition:filter .4s}
+.org.on{filter:drop-shadow(0 0 6px currentColor);animation:pl 1.2s ease-in-out infinite}
+@keyframes pl{50%{opacity:.8}}
+.mk{cursor:pointer}.mk text{font:800 12px "Be Vietnam Pro",sans-serif;fill:#fff;text-anchor:middle}
+.lab{font:600 9px "Be Vietnam Pro",sans-serif;fill:#3b4d60;text-anchor:middle}
+.jaw{transform-box:fill-box;transform-origin:50% 0}
+body[data-s="1"] .jaw{animation:ch .6s ease-in-out infinite}
+@keyframes ch{50%{transform:translateY(3px)}}
+.dr{animation:dr 1.6s linear infinite}
+@keyframes dr{from{transform:translateY(-4px);opacity:0}50%{opacity:1}to{transform:translateY(8px);opacity:0}}
+.nu{animation:nu 2s linear infinite}
+@keyframes nu{from{transform:translateY(8px);opacity:0}50%{opacity:1}to{transform:translateY(-14px);opacity:0}}
+.flow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px}
+.chip{--c:#999;border:0;font:inherit;font-weight:800;font-size:clamp(11px,1.8vh,15px);color:#fff;background:var(--c);padding:6px 12px;border-radius:10px;cursor:pointer;transition:transform .3s}
+.chip.on{transform:scale(1.15);box-shadow:0 4px 12px #0003}
+.ar{font-weight:800;font-size:20px;color:#4d6177}
+.know{display:flex;gap:14px;align-items:center;background:#fff;border:2px dashed #9db6c9;border-radius:14px;padding:8px 16px;font-size:clamp(11px,1.8vh,15px)}
+.know b{font-size:1.1em;white-space:nowrap}
+.know ul{margin:0;padding:0;list-style:none;display:flex;gap:18px;flex-wrap:wrap}
+.know li::before{content:"✔ ";color:#2e9e5b}
+body::before{content:"";position:fixed;inset:-20%;z-index:-1;background:radial-gradient(circle at 18% 28%,#ffe1d3cc,transparent 38%),radial-gradient(circle at 82% 72%,#d3e9ffcc,transparent 40%),radial-gradient(circle at 70% 15%,#fff3c4aa,transparent 30%);animation:bl 16s ease-in-out infinite alternate}
+@keyframes bl{to{transform:translate(3%,-3%) scale(1.08)}}
+@keyframes in{from{opacity:0;transform:translateY(18px)}}
+.app{position:relative}
+.prog{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.prog i{height:7px;border-radius:9px;background:#cfdeea;overflow:hidden;position:relative}
+.prog i::after{content:"";position:absolute;inset:0;background:var(--pc);transform:scaleX(var(--f,0));transform-origin:left}
+.prog i:nth-child(1){--pc:var(--c1)}.prog i:nth-child(2){--pc:var(--c2)}.prog i:nth-child(3){--pc:var(--c3)}.prog i:nth-child(4){--pc:var(--c4)}.prog i:nth-child(5){--pc:var(--c5)}.prog i:nth-child(6){--pc:var(--c6)}
+svg.body{filter:drop-shadow(0 14px 24px #1d2b3a22)}
+#bolus{filter:drop-shadow(0 0 4px #fff)}
+.org.on[data-s="3"]{animation:ch2 1.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.org.on[data-s="4"]{animation:ch3 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes ch2{50%{transform:scale(1.05,.95)}}@keyframes ch3{50%{transform:scale(1.03,.98)}}
+main{min-height:min(62vh,540px)}
+.sp{font-size:13px;font-weight:600;display:flex;gap:6px;align-items:center}.sp select{font:inherit;padding:6px 8px;border-radius:8px;border:2px solid #cfdeea;background:#fff}
+.detail{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;background:#ffffffe0;backdrop-filter:blur(8px);border-radius:16px;padding:8px 16px;box-shadow:0 2px 12px #1d2b3a1c;border-left:8px solid var(--dc,#e5484d);transition:border-color .6s}
+.dn{flex:none;width:44px;height:44px;border-radius:50%;background:var(--dc,#e5484d);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:800;transition:background .6s}
+.dtx{flex:1 1 280px;min-width:0}.dtx h2{margin:0;font-size:clamp(14px,2.4vh,20px)}.dtx p{margin:2px 0 0;font-size:clamp(11px,1.9vh,15px);color:#3d5166;line-height:1.35}
+.dfs{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.ft{background:#f4f8fb;border:1.5px solid var(--dc);border-radius:10px;padding:4px 10px;font-size:clamp(10px,1.6vh,13px);line-height:1.25}
+.ft small{display:block;color:#5b7088;font-weight:600}.ft b{font-weight:700}
+.detail.sw .dtx,.detail.sw .dfs{animation:in .7s}
+.cl{font:600 9.5px "Be Vietnam Pro",sans-serif;fill:#26405a;text-anchor:end;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}.cl.r{text-anchor:start}
+.fx{opacity:0;transition:opacity .8s}
+body[data-s="3"] .fx3,body[data-s="4"] .fx4,body[data-s="5"] .fx5{opacity:1}
+.bub{animation:bub 2.4s linear infinite}
+@keyframes bub{from{transform:translateY(10px);opacity:0}30%{opacity:.95}to{transform:translateY(-12px);opacity:0}}
+.beat{transform-box:fill-box;transform-origin:center;animation:bt 1s ease-in-out infinite}
+@keyframes bt{0%,100%{transform:scale(1)}15%{transform:scale(1.1)}30%{transform:scale(1)}45%{transform:scale(1.07)}}
+.lung{transform-box:fill-box;transform-origin:50% 100%;animation:br 4.5s ease-in-out infinite}
+@keyframes br{50%{transform:scale(1.035,1.05)}}
+.app{padding:6px 16px 8px;gap:6px}
+h1{font-size:clamp(20px,3.8vh,36px)}header p{font-size:clamp(11px,1.7vh,15px)}
+.ctrl button,#st{padding:6px 11px;font-size:12px}.sp{font-size:12px}
+main{grid-template-columns:minmax(150px,225px) auto minmax(150px,225px);justify-content:center;gap:14px;min-height:min(72vh,700px)}
+.card{padding:6px 10px;font-size:clamp(10px,1.4vh,12.5px);border-left-width:5px}.card h3{margin-bottom:2px}.card ul{line-height:1.3}
+.detail{padding:5px 12px;gap:6px 12px}.dn{width:34px;height:34px;font-size:17px}
+.dtx h2{font-size:clamp(12px,1.9vh,16px)}.dtx p{font-size:clamp(10px,1.5vh,13px);margin:0}
+.ft{padding:3px 8px;font-size:clamp(9px,1.3vh,12px)}
+.chip{padding:4px 9px;font-size:clamp(10px,1.4vh,13px)}.ar{font-size:15px}
+@media(prefers-reduced-motion:reduce){.beat,.lung{animation:none!important}}
+.zoom{display:flex;flex-direction:column;gap:8px;background:#ffffffe0;backdrop-filter:blur(8px);border-radius:18px;padding:12px;box-shadow:0 4px 18px #1d2b3a22;border-top:6px solid var(--dc,#e5484d);min-height:0;overflow:auto;transition:border-color .6s}
+main{grid-template-columns:minmax(270px,380px) auto minmax(250px,350px);gap:18px;min-height:min(80vh,800px)}
+.zring{width:min(100%,38vh);aspect-ratio:1;margin:0 auto;flex:none}.zring svg{width:100%;height:100%;display:block}
+.zh{display:flex;gap:10px;align-items:center}.zh h2{margin:0;font-size:clamp(15px,2.4vh,21px)}
+.zt p{margin:6px 0;font-size:clamp(12px,1.85vh,16px);line-height:1.45;color:#33475c}
+.zt .dfs{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:6px}
+.zt .ft{font-size:clamp(11px,1.65vh,14px);padding:5px 10px}
+.dn{width:36px;height:36px;font-size:18px}
+.zt{animation:in .7s}
+.zs{opacity:0;visibility:hidden;transition:opacity .6s,visibility 0s .6s;transform-origin:150px 150px}
+.zs.on{opacity:1;visibility:visible;transition:opacity .6s;animation:zin .8s}
+@keyframes zin{from{transform:scale(.82)}}
+.zl{font:700 13px "Be Vietnam Pro",sans-serif;fill:#3a2d4d;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+#ring{transition:cx .9s ease,cy .9s ease,stroke .5s;transform-box:fill-box;transform-origin:center;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.col{justify-content:space-between;gap:8px}
+.card{font-size:clamp(12px,1.8vh,16px);padding:8px 12px;border-left-width:6px}
+.card h3{margin-bottom:3px}
+.ctrl button{padding:8px 16px;font-size:13px}
+@media(max-width:900px){main{min-height:0}.zoom{order:-1}.zring{width:min(80vw,340px)}
+ html,body{height:auto}.app{height:auto}
+ main{grid-template-columns:1fr}.col{display:contents}
+ svg.body{height:auto;width:min(100%,380px);margin:0 auto}
+ .card{order:var(--o)}svg.body{order:0}
+}
+@media(prefers-reduced-motion:reduce){.org.on,.jaw,.dr,.nu{animation:none!important}}
+</style>
+</head>
+<body data-s="1">
+<div class="app">
+<header>
+ <div><h1>HÀNH TRÌNH CỦA THỨC ĂN</h1><p>Từ miếng ăn đến chất dinh dưỡng nuôi cơ thể</p></div>
+ <div class="ctrl"><button id="fs" type="button">⛶ Toàn màn hình</button></div>
+</header>
+<div class="prog" id="prog"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<main>
+<aside class="zoom" id="zp">
+ <div class="zring"><svg id="zsvg" viewBox="0 0 300 300" role="img" aria-label="Hình phóng to từng chặng">
+ <defs><clipPath id="zc"><circle cx="150" cy="150" r="142"/></clipPath></defs>
+ <g clip-path="url(#zc)">
+<g class="zs" data-s="1"><g transform="translate(150,150) scale(3.05) translate(-58,-78)"><circle cx="58" cy="78" r="46" fill="#f3a7a4"/><g clip-path="url(#cm)">
+  <ellipse cx="58" cy="96" rx="34" ry="24" fill="#7d2434"/>
+  <g id="jwL"><path d="M10 117Q58 108 106 117V180H10Z" fill="#d95f74"/><ellipse cx="58" cy="112" rx="25" ry="10" fill="#e0707c"/><path d="M42 110Q58 104 74 110" stroke="#fff" stroke-width="2" opacity=".4" fill="none"/>
+   
+   <g fill="#fff" stroke="#d6cfc8" stroke-width=".8"><rect x="21.0" y="100" width="10" height="17" rx="3"/><rect x="31.5" y="100" width="10" height="17" rx="3"/><rect x="42.0" y="100" width="10" height="17" rx="3"/><rect x="52.5" y="100" width="10" height="17" rx="3"/><rect x="63.0" y="100" width="10" height="17" rx="3"/><rect x="73.5" y="100" width="10" height="17" rx="3"/><rect x="84.0" y="100" width="10" height="17" rx="3"/></g>
+    
+   <g transform="translate(58,98)"><ellipse rx="10" ry="6.5" fill="#a8593a"/><circle cx="-5" cy="-2" r="2" fill="#c07a52"/><circle cx="5" cy="1" r="2.2" fill="#8a4630"/><animateTransform attributeName="transform" type="scale" additive="sum" values="1 1;1.3 .55;1 1" keyTimes="0;.5;1" dur=".9s" repeatCount="indefinite" begin="jw.begin" end="jw.end" calcMode="spline" keySplines=".4 0 .6 1;.4 0 .6 1"/></g>
+   <animateTransform id="jw" attributeName="transform" type="translate" values="0 0;0 -30;0 0" keyTimes="0;.5;1" dur=".9s" repeatCount="indefinite" begin="indefinite" calcMode="spline" keySplines=".4 0 .6 1;.4 0 .6 1"/>
+  </g>
+  <path d="M12 38Q58 24 104 38V50Q58 42 12 50Z" fill="#d95f74"/>
+  <g fill="#fff" stroke="#d6cfc8" stroke-width=".8"><rect x="22" y="48" width="9.5" height="18" rx="3"/><rect x="32" y="48" width="9.5" height="18" rx="3"/><rect x="42" y="48" width="9.5" height="18" rx="3"/><rect x="52" y="48" width="9.5" height="18" rx="3"/><rect x="62" y="48" width="9.5" height="18" rx="3"/><rect x="72" y="48" width="9.5" height="18" rx="3"/><rect x="82" y="48" width="9.5" height="18" rx="3"/></g>
+  <g fill="#4aa3e0"><circle class="dr" cx="36" cy="84" r="2.4"/><circle class="dr" style="animation-delay:.5s" cx="82" cy="86" r="2.4"/><circle class="dr" style="animation-delay:1s" cx="58" cy="80" r="2"/></g>
+ </g></g><text class="zl" x="150" y="286">Răng · lưỡi · nước bọt</text></g>
+<g class="zs" data-s="2"><rect width="300" height="300" fill="#fde7ee"/>
+<rect x="70" y="96" width="36" height="204" rx="12" fill="#d6ebf7" stroke="#8ebbd6" stroke-width="3"/>
+<path d="M72 120h32M72 144h32M72 168h32M72 192h32M72 216h32M72 240h32M72 264h32" stroke="#8ebbd6" stroke-width="3"/>
+<path d="M104 0H276L246 70Q238 92 238 114V300H160V114Q160 92 132 70Z" fill="#f7a9c0" stroke="#d6567f" stroke-width="4"/>
+<path d="M124 0H256L230 70Q222 94 222 118V300H176V118Q176 94 150 70Z" fill="#b6406a" opacity=".3"/>
+<g><path d="M106 92L100 52Q113 46 119 62L118 94Z" fill="#f08aa8" stroke="#c2456f" stroke-width="2"><animateTransform attributeName="transform" type="rotate" values="0 106 94;-82 106 94;-82 106 94;0 106 94;0 106 94" keyTimes="0;.15;.5;.65;1" dur="5s" repeatCount="indefinite"/></path></g>
+<ellipse rx="26" ry="19" fill="#b9824f" stroke="#7a4a24" stroke-width="2"><animateMotion dur="5s" repeatCount="indefinite" path="M190 26L200 96L199 130L199 282"/></ellipse>
+<rect x="154" y="-16" width="90" height="16" rx="8" fill="#9d2f5b"><animateTransform attributeName="transform" type="translate" values="0 100;0 112;0 250" keyTimes="0;.35;1" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;.8;.8;0" keyTimes="0;.33;.4;.95;1" dur="5s" repeatCount="indefinite"/></rect>
+<text class="zl" x="196" y="44">Hầu</text><text class="zl" x="88" y="84" style="font-size:11px">Nắp thanh quản</text><text class="zl" x="88" y="292" style="font-size:11px">Khí quản</text><text class="zl" x="270" y="196" style="font-size:11px;text-anchor:end">Thực quản</text></g>
+<g class="zs" data-s="3"><rect width="300" height="300" fill="#fff0de"/>
+<defs><radialGradient id="zS" cx="35%" cy="25%" r="90%"><stop offset="0" stop-color="#ffd9b0"/><stop offset=".6" stop-color="#f5955a"/><stop offset="1" stop-color="#d9622f"/></radialGradient></defs>
+<path d="M70 72C110 36 200 44 240 102C278 158 250 244 184 262C142 274 112 256 114 226C116 198 152 192 152 168C152 140 96 132 70 100Z" fill="url(#zS)" stroke="#c4561f" stroke-width="5"><animate attributeName="d" dur="2.6s" repeatCount="indefinite" values="M70 72C110 36 200 44 240 102C278 158 250 244 184 262C142 274 112 256 114 226C116 198 152 192 152 168C152 140 96 132 70 100Z;M78 80C112 50 192 56 230 108C262 160 238 232 182 250C148 260 124 246 126 226C128 204 158 198 158 172C158 148 108 140 78 108Z;M70 72C110 36 200 44 240 102C278 158 250 244 184 262C142 274 112 256 114 226C116 198 152 192 152 168C152 140 96 132 70 100Z" keyTimes="0;.5;1" calcMode="spline" keySplines=".4 0 .6 1;.4 0 .6 1"/></path>
+<path d="M70 72C110 36 200 44 240 102C278 158 250 244 184 262C142 274 112 256 114 226C116 198 152 192 152 168C152 140 96 132 70 100Z" fill="none" stroke="#ffe0a3" stroke-width="10" opacity=".8" transform="translate(0,0)"><animate attributeName="d" dur="2.6s" repeatCount="indefinite" values="M70 72C110 36 200 44 240 102C278 158 250 244 184 262C142 274 112 256 114 226C116 198 152 192 152 168C152 140 96 132 70 100Z;M78 80C112 50 192 56 230 108C262 160 238 232 182 250C148 260 124 246 126 226C128 204 158 198 158 172C158 148 108 140 78 108Z;M70 72C110 36 200 44 240 102C278 158 250 244 184 262C142 274 112 256 114 226C116 198 152 192 152 168C152 140 96 132 70 100Z" keyTimes="0;.5;1" calcMode="spline" keySplines=".4 0 .6 1;.4 0 .6 1"/></path>
+<path d="M104 78Q150 70 200 100M92 100Q150 96 226 140M110 160Q170 150 240 190M130 220Q170 210 200 236" stroke="#fff" stroke-width="3" fill="none" opacity=".35" stroke-linecap="round"/>
+<circle r="14" fill="#a8683a"><animateMotion dur="4.2s" repeatCount="indefinite" path="M160 120m-38 0a38 22 0 1 0 76 0a38 22 0 1 0 -76 0"/><animate attributeName="r" values="14;7.0;14" dur="7s" repeatCount="indefinite"/></circle><circle r="11" fill="#c28a52"><animateMotion dur="3.4s" repeatCount="indefinite" path="M175 175m-34 0a34 20 0 1 0 68 0a34 20 0 1 0 -68 0"/><animate attributeName="r" values="11;5.5;11" dur="7s" repeatCount="indefinite"/></circle><circle r="9" fill="#8a5530"><animateMotion dur="3s" repeatCount="indefinite" path="M190 110m-26 0a26 16 0 1 0 52 0a26 16 0 1 0 -52 0"/><animate attributeName="r" values="9;4.5;9" dur="7s" repeatCount="indefinite"/></circle><circle r="12" fill="#b9824f"><animateMotion dur="5s" repeatCount="indefinite" path="M200 210m-30 0a30 16 0 1 0 60 0a30 16 0 1 0 -60 0"/><animate attributeName="r" values="12;6.0;12" dur="7s" repeatCount="indefinite"/></circle><circle class="bub" style="animation-delay:0s" cx="110" cy="80" r="4.5" fill="#d9f24a"/><circle class="bub" style="animation-delay:0.5s" cx="215" cy="130" r="4.5" fill="#d9f24a"/><circle class="bub" style="animation-delay:1.1s" cx="235" cy="170" r="4.5" fill="#d9f24a"/><circle class="bub" style="animation-delay:1.6s" cx="165" cy="230" r="4.5" fill="#d9f24a"/><circle class="bub" style="animation-delay:0.8s" cx="130" cy="110" r="4.5" fill="#d9f24a"/><circle class="bub" style="animation-delay:1.9s" cx="200" cy="90" r="4.5" fill="#d9f24a"/>
+<path d="M138 120l10-8 8 8 10-8 8 8" stroke="#7b3fa0" stroke-width="3" fill="none"/><path d="M200 196l8-8 8 8 8-8 8 8" stroke="#7b3fa0" stroke-width="3" fill="none"/>
+<text class="zl" x="150" y="288">Dịch vị: HCl + pepsin</text></g>
+<g class="zs" data-s="4"><rect width="300" height="300" fill="#fff3c9"/><circle cx="30" cy="70" r="5" fill="#c98e3a"><animate attributeName="cx" values="30;58;30" dur="6s" repeatCount="indefinite"/></circle><circle cx="90" cy="52" r="5" fill="#c98e3a"><animate attributeName="cx" values="90;70;90" dur="6s" repeatCount="indefinite"/></circle><circle cx="150" cy="64" r="5" fill="#c98e3a"><animate attributeName="cx" values="150;174;150" dur="6s" repeatCount="indefinite"/></circle><circle cx="210" cy="50" r="5" fill="#c98e3a"><animate attributeName="cx" values="210;184;210" dur="6s" repeatCount="indefinite"/></circle><circle cx="270" cy="72" r="5" fill="#c98e3a"><animate attributeName="cx" values="270;290;270" dur="6s" repeatCount="indefinite"/></circle><circle cx="120" cy="180" r="5" fill="#c98e3a"><animate attributeName="cx" values="120;102;120" dur="6s" repeatCount="indefinite"/></circle><circle cx="228" cy="170" r="5" fill="#c98e3a"><animate attributeName="cx" values="228;250;228" dur="6s" repeatCount="indefinite"/></circle>
+<rect y="250" width="300" height="60" fill="#f0b45a"/><path d="M0 264H300" stroke="#d98f2b" stroke-width="3" stroke-dasharray="14 4"/>
+<g transform="translate(54,252)"><g><animateTransform attributeName="transform" type="skewX" values="0;-4;0;4;0" dur="3.6s" begin="0s" repeatCount="indefinite"/>
+<path d="M-20 0V-100Q-20 -148 0 -148Q20 -148 20 -100V0Z" fill="#ffd45e" stroke="#d6a100" stroke-width="3"/>
+<path d="M-8 0V-122" stroke="#e5484d" stroke-width="6" stroke-linecap="round"/><path d="M-8 0V-122" stroke="#fff" stroke-width="2" stroke-dasharray="3 9"><animate attributeName="stroke-dashoffset" from="24" to="0" dur=".9s" repeatCount="indefinite"/></path>
+<path d="M9 0V-128" stroke="#fffbe0" stroke-width="5" stroke-linecap="round"/>
+<circle r="4.5" fill="#6fcf4a"><animateMotion dur="3.2s" begin="0s" repeatCount="indefinite" path="M-52 -150Q-34 -118 -10 -100L-8 -30"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="3.2s" begin="0s" repeatCount="indefinite"/></circle>
+<circle r="4" fill="#f7a823" stroke="#fff" stroke-width="1"><animateMotion dur="3.6s" begin="0s" repeatCount="indefinite" path="M54 -150Q36 -118 12 -100L9 -30"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="3.6s" begin="0s" repeatCount="indefinite"/></circle></g></g><g transform="translate(118,252)"><g><animateTransform attributeName="transform" type="skewX" values="0;-4;0;4;0" dur="3.6s" begin="0.8s" repeatCount="indefinite"/>
+<path d="M-20 0V-100Q-20 -148 0 -148Q20 -148 20 -100V0Z" fill="#ffd45e" stroke="#d6a100" stroke-width="3"/>
+<path d="M-8 0V-122" stroke="#e5484d" stroke-width="6" stroke-linecap="round"/><path d="M-8 0V-122" stroke="#fff" stroke-width="2" stroke-dasharray="3 9"><animate attributeName="stroke-dashoffset" from="24" to="0" dur=".9s" repeatCount="indefinite"/></path>
+<path d="M9 0V-128" stroke="#fffbe0" stroke-width="5" stroke-linecap="round"/>
+<circle r="4.5" fill="#6fcf4a"><animateMotion dur="3.2s" begin="0.8s" repeatCount="indefinite" path="M-52 -150Q-34 -118 -10 -100L-8 -30"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="3.2s" begin="0.8s" repeatCount="indefinite"/></circle>
+<circle r="4" fill="#f7a823" stroke="#fff" stroke-width="1"><animateMotion dur="3.6s" begin="0.8s" repeatCount="indefinite" path="M54 -150Q36 -118 12 -100L9 -30"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="3.6s" begin="0.8s" repeatCount="indefinite"/></circle></g></g><g transform="translate(184,252)"><g><animateTransform attributeName="transform" type="skewX" values="0;-4;0;4;0" dur="3.6s" begin="1.6s" repeatCount="indefinite"/>
+<path d="M-20 0V-100Q-20 -148 0 -148Q20 -148 20 -100V0Z" fill="#ffd45e" stroke="#d6a100" stroke-width="3"/>
+<path d="M-8 0V-122" stroke="#e5484d" stroke-width="6" stroke-linecap="round"/><path d="M-8 0V-122" stroke="#fff" stroke-width="2" stroke-dasharray="3 9"><animate attributeName="stroke-dashoffset" from="24" to="0" dur=".9s" repeatCount="indefinite"/></path>
+<path d="M9 0V-128" stroke="#fffbe0" stroke-width="5" stroke-linecap="round"/>
+<circle r="4.5" fill="#6fcf4a"><animateMotion dur="3.2s" begin="1.6s" repeatCount="indefinite" path="M-52 -150Q-34 -118 -10 -100L-8 -30"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="3.2s" begin="1.6s" repeatCount="indefinite"/></circle>
+<circle r="4" fill="#f7a823" stroke="#fff" stroke-width="1"><animateMotion dur="3.6s" begin="1.6s" repeatCount="indefinite" path="M54 -150Q36 -118 12 -100L9 -30"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="3.6s" begin="1.6s" repeatCount="indefinite"/></circle></g></g><g transform="translate(248,252)"><g><animateTransform attributeName="transform" type="skewX" values="0;-4;0;4;0" dur="3.6s" begin="2.4s" repeatCount="indefinite"/>
+<path d="M-20 0V-100Q-20 -148 0 -148Q20 -148 20 -100V0Z" fill="#ffd45e" stroke="#d6a100" stroke-width="3"/>
+<path d="M-8 0V-122" stroke="#e5484d" stroke-width="6" stroke-linecap="round"/><path d="M-8 0V-122" stroke="#fff" stroke-width="2" stroke-dasharray="3 9"><animate attributeName="stroke-dashoffset" from="24" to="0" dur=".9s" repeatCount="indefinite"/></path>
+<path d="M9 0V-128" stroke="#fffbe0" stroke-width="5" stroke-linecap="round"/>
+<circle r="4.5" fill="#6fcf4a"><animateMotion dur="3.2s" begin="2.4s" repeatCount="indefinite" path="M-52 -150Q-34 -118 -10 -100L-8 -30"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="3.2s" begin="2.4s" repeatCount="indefinite"/></circle>
+<circle r="4" fill="#f7a823" stroke="#fff" stroke-width="1"><animateMotion dur="3.6s" begin="2.4s" repeatCount="indefinite" path="M54 -150Q36 -118 12 -100L9 -30"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" dur="3.6s" begin="2.4s" repeatCount="indefinite"/></circle></g></g><text class="zl" x="150" y="44">Nhung mao ruột non</text></g>
+<g class="zs" data-s="5"><rect width="300" height="300" fill="#f7ece1"/>
+<rect y="100" width="300" height="100" fill="#d8b78a" opacity=".55"/>
+<path d="M-10 96Q30 52 70 96T150 96T230 96T310 96" fill="none" stroke="#a8683a" stroke-width="34"/><path d="M-10 96Q30 52 70 96T150 96T230 96T310 96" fill="none" stroke="#c98e5c" stroke-width="22"/>
+<path d="M-10 204Q30 248 70 204T150 204T230 204T310 204" fill="none" stroke="#a8683a" stroke-width="34"/><path d="M-10 204Q30 248 70 204T150 204T230 204T310 204" fill="none" stroke="#c98e5c" stroke-width="22"/>
+<g><animateTransform attributeName="transform" type="translate" values="-40 0;40 0;-40 0" dur="9s" repeatCount="indefinite"/>
+<rect x="80" y="128" width="140" height="44" rx="22" fill="#d8a85a"><animate attributeName="fill" values="#d8a85a;#8a5a2e;#d8a85a" dur="9s" repeatCount="indefinite"/></rect><path d="M110 140q20-8 40 0M160 158q18 6 36-2" stroke="#fff" stroke-width="3" opacity=".3" fill="none"/></g>
+<g transform="translate(70,128)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="4s" repeatCount="indefinite"/></rect></g><g transform="translate(120,172)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="5s" repeatCount="indefinite"/></rect></g><g transform="translate(232,134)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="3.5s" repeatCount="indefinite"/></rect></g><g transform="translate(190,176)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="4.5s" repeatCount="indefinite"/></rect></g><g transform="translate(262,170)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="6s" repeatCount="indefinite"/></rect></g><g transform="translate(44,172)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="3s" repeatCount="indefinite"/></rect></g><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0s" repeatCount="indefinite" path="M80 140 L80 86"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0.5s" repeatCount="indefinite" path="M140 140 L140 84"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0.5s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="1s" repeatCount="indefinite" path="M200 140 L200 86"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="1s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="1.5s" repeatCount="indefinite" path="M250 140 L250 84"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="1.5s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0.8s" repeatCount="indefinite" path="M110 162 L110 214"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0.8s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M180 162 L180 216"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="1.3s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0.2s" repeatCount="indefinite" path="M240 162 L240 214"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0.2s" repeatCount="indefinite"/></circle><text class="zl" x="150" y="150" style="font-size:11px;fill:#fff;stroke:#7a4a24">Phân đang hình thành</text><text class="zl" x="150" y="286" style="font-size:11px">Nước ↑ · vi khuẩn có ích</text></g>
+<g class="zs" data-s="6"><rect width="300" height="300" fill="#efe9fb"/>
+<path d="M100 -10Q64 70 86 140L100 210H200L214 140Q236 70 200 -10Z" fill="#b8a5ee" stroke="#6247b8" stroke-width="4"/>
+<path d="M116 -10Q90 70 106 140L116 210H184L194 140Q210 70 184 -10Z" fill="#d8cdf8"/>
+<rect x="104" y="210" width="92" height="90" fill="#cabff2"/><rect x="130" y="210" width="40" height="90" fill="#8e7bd0"/>
+<rect x="96" y="210" width="108" height="16" rx="8" fill="#6247b8"><animate attributeName="x" values="96;96;80;80;96" keyTimes="0;.45;.58;.78;1" dur="6s" repeatCount="indefinite"/><animate attributeName="width" values="108;108;140;140;108" keyTimes="0;.45;.58;.78;1" dur="6s" repeatCount="indefinite"/></rect>
+<rect x="100" y="234" width="100" height="14" rx="7" fill="#8a6fe0"><animate attributeName="x" values="100;100;86;86;100" keyTimes="0;.5;.62;.8;1" dur="6s" repeatCount="indefinite"/><animate attributeName="width" values="100;100;128;128;100" keyTimes="0;.5;.62;.8;1" dur="6s" repeatCount="indefinite"/></rect>
+<ellipse rx="30" ry="22" fill="#7a4a24" stroke="#4d2c12" stroke-width="2"><animateMotion dur="6s" repeatCount="indefinite" keyTimes="0;.3;.55;.75;1" keyPoints="0;.2;.5;.8;1" calcMode="linear" path="M150 60L150 190L150 240L150 300"/><animate attributeName="opacity" values="1;1;1;1;0" keyTimes="0;.3;.75;.9;1" dur="6s" repeatCount="indefinite"/></ellipse>
+<text class="zl" x="22" y="118" style="text-anchor:start;font-size:11px">Trực tràng</text><text class="zl" x="212" y="236" style="text-anchor:start;font-size:11px">Cơ thắt</text><text class="zl" x="150" y="288" style="font-size:11px">Hậu môn</text></g>
+ </g>
+ <circle cx="150" cy="150" r="142" fill="none" style="stroke:var(--dc,#e5484d)" stroke-width="8"/>
+ </svg></div>
+ <div class="zt"><div class="zh"><span class="dn" id="dn">1</span><h2 id="dh"></h2></div><p id="dp"></p><div class="dfs" id="df"></div></div>
+</aside>
+<svg class="body" viewBox="36 14 330 552" role="img" aria-label="Mô hình cơ thể người trong suốt cho thấy hệ tiêu hóa">
+<defs>
+ <linearGradient id="gB" x1="0" x2="1"><stop offset="0" stop-color="#bfd4e6"/><stop offset=".45" stop-color="#f3f8fc"/><stop offset="1" stop-color="#b6cde1"/></linearGradient>
+ <linearGradient id="fg" gradientUnits="userSpaceOnUse" x1="0" y1="525" x2="0" y2="590"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
+ <mask id="fm"><rect width="400" height="600" fill="url(#fg)"/></mask>
+ <radialGradient id="gS" cx="35%" cy="25%" r="85%"><stop offset="0" stop-color="#ffd9b0"/><stop offset=".55" stop-color="#f5955a"/><stop offset="1" stop-color="#d9622f"/></radialGradient>
+ <radialGradient id="gL" cx="30%" cy="25%" r="90%"><stop offset="0" stop-color="#d27a62"/><stop offset=".6" stop-color="#a24534"/><stop offset="1" stop-color="#6e2a20"/></radialGradient>
+ <linearGradient id="gLg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffc9d4"/><stop offset=".6" stop-color="#f19bb0"/><stop offset="1" stop-color="#d9708c"/></linearGradient>
+ <radialGradient id="gH" cx="35%" cy="30%"><stop offset="0" stop-color="#ef6a62"/><stop offset="1" stop-color="#a8262c"/></radialGradient>
+ <linearGradient id="gR" x1="0" x2="1"><stop offset="0" stop-color="#9a82e6"/><stop offset="1" stop-color="#6247b8"/></linearGradient>
+ <filter id="ds" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1.5" dy="3" stdDeviation="2.4" flood-color="#3b2a40" flood-opacity=".32"/></filter>
+ <filter id="d3" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+  <feGaussianBlur in="SourceAlpha" stdDeviation="2.4" result="bl"/>
+  <feDiffuseLighting in="bl" surfaceScale="5" diffuseConstant="1.2" lighting-color="#fff" result="df"><feDistantLight azimuth="235" elevation="58"/></feDiffuseLighting>
+  <feComposite in="SourceGraphic" in2="df" operator="arithmetic" k1="1.18" k2="0" k3="0" k4="0" result="sh"/>
+  <feSpecularLighting in="bl" surfaceScale="5" specularConstant=".8" specularExponent="26" lighting-color="#fff" result="sp"><feDistantLight azimuth="235" elevation="52"/></feSpecularLighting>
+  <feComposite in="sp" in2="SourceAlpha" operator="in" result="spc"/>
+  <feComposite in="sh" in2="spc" operator="arithmetic" k1="0" k2="1" k3=".9" k4="0" result="lit"/>
+  <feDropShadow in="lit" dx="1.5" dy="3.5" stdDeviation="2.6" flood-color="#3b2a40" flood-opacity=".34"/>
+ </filter>
+ <clipPath id="cm"><circle cx="58" cy="78" r="46"/></clipPath>
+ <clipPath id="cv"><circle cx="346" cy="352" r="46"/></clipPath>
+ <path id="rl" d="M92 150Q80 200 108 244M90 176Q80 220 112 262M90 204Q82 244 116 284M92 230Q88 262 124 304" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".75"/>
+</defs>
+<g transform="translate(30,0)">
+ <g mask="url(#fm)">
+  <path d="M152 76L152 114Q170 110 188 114L188 76Z" fill="url(#gB)" stroke="#a9c1d6" stroke-width="2"/>
+  <path d="M98 124Q170 100 242 124Q268 132 266 158L254 300Q252 440 248 590L92 590Q88 440 86 300L74 158Q72 132 98 124Z" fill="url(#gB)" stroke="#a3bdd3" stroke-width="2.2"/>
+  <ellipse cx="170" cy="46" rx="30" ry="38" fill="url(#gB)" stroke="#a3bdd3" stroke-width="2.2"/>
+  <ellipse cx="128" cy="230" rx="26" ry="90" fill="#fff" opacity=".28" transform="rotate(6 128 230)"/><path d="M84 150Q84 134 100 130" stroke="#fff" stroke-width="4" fill="none" opacity=".8" stroke-linecap="round"/>
+  <path d="M170 124V560" stroke="#8fa9c0" stroke-width="13" stroke-dasharray="9 3.5" opacity=".28"/>
+  <use href="#rl"/><use href="#rl" transform="translate(340,0) scale(-1,1)"/>
+ </g>
+ <g filter="url(#d3)">
+  <!-- phổi, khí quản, tim -->
+  <path class="lung" d="M102 142Q140 126 160 152L160 238Q130 254 106 236Q92 190 102 142Z" fill="url(#gLg)" stroke="#c45a78" stroke-width="1.5"/>
+  <path class="lung" d="M238 142Q200 126 180 152L180 238Q210 254 234 236Q248 190 238 142Z" fill="url(#gLg)" stroke="#c45a78" stroke-width="1.5"/>
+  <path d="M161 150Q148 158 128 168M161 152Q148 184 126 204M179 150Q192 158 212 168M179 152Q192 184 214 204" stroke="#fff4f6" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <rect x="156" y="84" width="10" height="68" rx="4" fill="#dceffa" stroke="#8ebbd6"/>
+  <path d="M161 86V150" stroke="#8ebbd6" stroke-width="8" stroke-dasharray="1.2 4.5" fill="none"/>
+  <path class="beat" d="M190 192C176 188 170 206 190 230C212 206 206 188 190 192Z" fill="url(#gH)"/><path d="M184 198q6 -4 10 2" stroke="#fff" stroke-width="2" opacity=".5" fill="none"/>
+  <path d="M92 242Q170 214 248 242L248 254Q170 230 92 254Z" fill="#e5a9a0" opacity=".7"/>
+  <!-- gan, túi mật, lách, tụy -->
+  <path d="M98 254Q136 242 184 260Q194 266 190 280Q172 298 150 308Q112 308 96 284Z" fill="url(#gL)"/>
+  <path d="M112 262Q140 254 170 266" stroke="#fff" stroke-width="5" opacity=".22" fill="none" stroke-linecap="round"/><path d="M150 262Q154 284 146 304" stroke="#5c2118" stroke-width="2" fill="none" opacity=".5"/>
+  <path d="M162 303q-8 2 -5 10 q4 6 10 2 q2 -8 -5 -12z" fill="#4f9f58" stroke="#2f7a3a"/>
+  <ellipse cx="240" cy="272" rx="7" ry="16" fill="#8a4a6b" transform="rotate(14 240 272)"/>
+  <path d="M142 318Q182 330 232 320Q238 330 226 336Q184 344 142 332Z" fill="#f1cf86" stroke="#cfa44a"/>
+ </g>
+ <g filter="url(#d3)">
+  <!-- 1 Miệng -->
+  <g class="org" data-s="1" style="color:var(--c1)">
+   <ellipse cx="146" cy="64" rx="7" ry="11" fill="#f2d27a" stroke="#c9a23a" transform="rotate(-12 146 64)"/><ellipse cx="194" cy="64" rx="7" ry="11" fill="#f2d27a" stroke="#c9a23a" transform="rotate(12 194 64)"/><path d="M152 66h-0M153 66L150 68M187 66L190 68" stroke="#c9a23a"/>
+   <rect x="150" y="57" width="40" height="22" rx="10" fill="#f3a7a4" stroke="#c2606a" stroke-width="1.5"/>
+   <path d="M156 64h28" stroke="#fff" stroke-width="3.2" stroke-dasharray="3 1.4"/><ellipse class="jaw" cx="170" cy="72" rx="11" ry="4.5" fill="#df6c78"/>
+  </g>
+  <!-- 2 Hầu + thực quản -->
+  <g class="org" data-s="2" style="color:var(--c2)">
+   <ellipse cx="172" cy="94" rx="10" ry="13" fill="#f08aa8"/>
+   <path d="M170 84L174 104L176 140L176 240" fill="none" stroke="#e8708f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+   <path d="M170 84L174 104L176 140L176 240" fill="none" stroke="#f8b3c8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+   <path d="M170 84L174 104L176 140L176 240" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="3 9" opacity=".8"><animate attributeName="stroke-dashoffset" from="24" to="0" dur="1.1s" repeatCount="indefinite"/></path>
+   <path d="M170 84L174 104L176 140L176 240" fill="none" stroke="#b8385f" stroke-width="13" stroke-dasharray="3 22" opacity=".55"><animate attributeName="stroke-dashoffset" from="25" to="0" dur="1.5s" repeatCount="indefinite"/></path>
+  </g>
+  <!-- 5 Ruột già (vẽ trước ruột non) -->
+  <g class="org" data-s="5" style="color:var(--c5)">
+   <path d="M114 452L114 332L228 332L228 436Q228 460 196 462" fill="none" stroke="#9c5f35" stroke-width="22" stroke-linejoin="round" stroke-dasharray="13 2.5"/>
+   <path d="M114 452L114 332L228 332L228 436Q228 460 196 462" fill="none" stroke="#c98e5c" stroke-width="15" stroke-linejoin="round" stroke-dasharray="13 2.5"/>
+   <path d="M114 452L114 332L228 332L228 436Q228 460 196 462" fill="none" stroke="#f0cba0" stroke-width="4" stroke-linejoin="round" stroke-dasharray="13 2.5" transform="translate(-2,-2)" opacity=".7"/>
+   <circle cx="114" cy="456" r="12" fill="#b57a4a"/><path d="M108 466q-10 8 -4 20" stroke="#a8683a" stroke-width="5" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- 6 Trực tràng + hậu môn -->
+  <g class="org" data-s="6" style="color:var(--c6)">
+   <path d="M196 462Q180 464 172 472L172 502" fill="none" stroke="url(#gR)" stroke-width="16" stroke-linejoin="round" stroke-linecap="round"/>
+   <path d="M196 462Q180 464 172 472L172 502" fill="none" stroke="#cbbff2" stroke-width="4" stroke-linecap="round" opacity=".6" transform="translate(-3,0)"/>
+   <circle cx="172" cy="508" r="9" fill="#4e3a99"/><circle cx="172" cy="508" r="4" fill="#d9d0f7"/>
+  </g>
+  <!-- 3 Dạ dày -->
+  <g class="org" data-s="3" style="color:var(--c3)">
+   <path id="stm" d="M176 242C192 232 218 234 232 256C244 278 232 306 210 310C196 312 186 308 184 300C184 292 196 290 196 280C196 270 180 266 176 254Z" fill="url(#gS)" stroke="#c4561f" stroke-width="2"><animate attributeName="d" dur="4.5s" repeatCount="indefinite" values="M176 242C192 232 218 234 232 256C244 278 232 306 210 310C196 312 186 308 184 300C184 292 196 290 196 280C196 270 180 266 176 254Z;M179 246C192 238 212 240 224 260C233 278 224 298 208 303C197 305 190 303 189 298C189 292 193 289 193 282C193 275 184 270 179 258Z;M176 242C192 232 218 234 232 256C244 278 232 306 210 310C196 312 186 308 184 300C184 292 196 290 196 280C196 270 180 266 176 254Z" keyTimes="0;.5;1" calcMode="spline" keySplines=".4 0 .6 1;.4 0 .6 1"/></path>
+   <path d="M200 248Q216 256 222 270M206 240Q226 250 232 268M204 276Q216 288 212 302M214 262Q226 272 224 288" stroke="#fff" stroke-width="2.2" fill="none" opacity=".4" stroke-linecap="round"/>
+   <ellipse cx="206" cy="246" rx="12" ry="5" fill="#fff" opacity=".35" transform="rotate(18 206 246)"/>
+  </g>
+  <!-- 4 Ruột non -->
+  <g class="org" data-s="4" style="color:var(--c4)">
+   <path d="M188 304L188 322L138 344L204 356L136 368L204 380L136 392L204 404L136 416L198 428L134 440L116 450" fill="none" stroke="#d9951a" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/>
+   <path d="M188 304L188 322L138 344L204 356L136 368L204 380L136 392L204 404L136 416L198 428L134 440L116 450" fill="none" stroke="#ffcf4d" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+   <path d="M188 304L188 322L138 344L204 356L136 368L204 380L136 392L204 404L136 416L198 428L134 440L116 450" fill="none" stroke="#b97a00" stroke-width="10" stroke-dasharray="1.2 5" opacity=".4"><animate attributeName="stroke-dashoffset" from="0" to="-6.2" dur=".9s" repeatCount="indefinite"/></path>
+   <path d="M188 304L188 322L138 344L204 356L136 368L204 380L136 392L204 404L136 416L198 428L134 440L116 450" fill="none" stroke="#fffbe0" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" transform="translate(0,-2.5)" opacity=".85"/>
+  </g>
+ </g>
+ <text class="lab" x="128" y="282" style="fill:#fff">Gan</text><text class="lab" x="136" y="196">Phổi</text><text class="lab" x="206" y="196">Phổi</text><text class="lab" x="196" y="244" style="fill:#fff;font-size:7px">Tim</text><text class="lab" x="186" y="327" style="font-size:7px">Tụy</text>
+ <g class="fx fx3" fill="#fff"><circle class="bub" cx="204" cy="266" r="2"/><circle class="bub" style="animation-delay:.6s" cx="216" cy="280" r="1.6"/><circle class="bub" style="animation-delay:1.2s" cx="224" cy="262" r="1.8"/><circle class="bub" style="animation-delay:1.8s" cx="200" cy="288" r="1.5"/><text class="lab" x="214" y="300" style="font-size:6.5px;fill:#fff">HCl · pepsin</text></g>
+ <g class="fx fx4"><circle r="2.6" fill="#3c9d4e"><animateMotion dur="1.6s" repeatCount="indefinite" path="M162 312Q178 312 188 322"/></circle><circle r="2.6" fill="#3c9d4e"><animateMotion dur="1.6s" begin=".8s" repeatCount="indefinite" path="M162 312Q178 312 188 322"/></circle><circle r="2.6" fill="#f7c948" stroke="#c99a00" stroke-width=".6"><animateMotion dur="1.4s" repeatCount="indefinite" path="M226 330Q206 324 190 322"/></circle><circle r="2.6" fill="#f7c948" stroke="#c99a00" stroke-width=".6"><animateMotion dur="1.4s" begin=".7s" repeatCount="indefinite" path="M226 330Q206 324 190 322"/></circle></g>
+ <g class="fx fx5" fill="#4aa3e0"><circle class="bub" cx="140" cy="326" r="2"/><circle class="bub" style="animation-delay:.7s" cx="176" cy="326" r="2"/><circle class="bub" style="animation-delay:1.4s" cx="210" cy="326" r="2"/><circle class="bub" style="animation-delay:.4s" cx="222" cy="390" r="2"/><circle class="bub" style="animation-delay:1.1s" cx="120" cy="390" r="2"/></g>
+ <g fill="none" stroke="none">
+  <path class="seg" data-d="6" d="M170 64L170 82"/>
+  <path class="seg" data-d="6.5" d="M170 84L174 104L176 140L176 240"/>
+  <path class="seg" data-d="7" d="M176 242C184 252 206 258 214 272C220 288 204 300 188 304"/>
+  <path class="seg" data-d="12" d="M188 304L188 322L138 344L204 356L136 368L204 380L136 392L204 404L136 416L198 428L134 440L116 450"/>
+  <path class="seg" data-d="11" d="M114 452L114 332L228 332L228 436Q228 460 196 462"/>
+  <path class="seg" data-d="6" d="M196 462Q180 464 172 472L172 508"/>
+ </g>
+ <circle id="bolus" r="5.5" cx="170" cy="64" fill="#c0392b" stroke="#fff" stroke-width="1.5"/>
+ <circle id="ring" r="26" fill="none" stroke="#e5484d" stroke-width="2.5" stroke-dasharray="6 5" cx="170" cy="64"/>
+ <g class="mk" data-s="1"><circle cx="218" cy="50" r="11" fill="var(--c1)"/><text x="218" y="54">1</text></g>
+ <g class="mk" data-s="2"><circle cx="196" cy="150" r="11" fill="var(--c2)"/><text x="196" y="154">2</text></g>
+ <g class="mk" data-s="3"><circle cx="222" cy="276" r="11" fill="var(--c3)"/><text x="222" y="280">3</text></g>
+ <g class="mk" data-s="4"><circle cx="170" cy="386" r="11" fill="var(--c4)"/><text x="170" y="390" style="fill:#4a3b00">4</text></g>
+ <g class="mk" data-s="5"><circle cx="171" cy="332" r="11" fill="var(--c5)"/><text x="171" y="336">5</text></g>
+ <g class="mk" data-s="6"><circle cx="200" cy="490" r="11" fill="var(--c6)"/><text x="200" y="494">6</text></g>
+</g>
+
+<g aria-hidden="true"><path d="M126 282L102 282" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="126" cy="282" r="1.8" fill="#26405a"/><text class="cl" x="98" y="285">Gan</text><path d="M186 312L102 318" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="186" cy="312" r="1.8" fill="#26405a"/><text class="cl" x="98" y="321">Túi mật</text><path d="M160 392L102 392" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="160" cy="392" r="1.8" fill="#26405a"/><text class="cl" x="98" y="395">Ruột non</text><path d="M134 456L102 458" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="134" cy="456" r="1.8" fill="#26405a"/><text class="cl" x="98" y="461">Manh tràng</text><path d="M134 482L102 486" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="134" cy="482" r="1.8" fill="#26405a"/><text class="cl" x="98" y="489">Ruột thừa</text><path d="M222 94L302 94" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="222" cy="94" r="1.8" fill="#26405a"/><text class="cl r" x="306" y="97">Hầu</text><path d="M210 170L302 170" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="210" cy="170" r="1.8" fill="#26405a"/><text class="cl r" x="306" y="173">Thực quản</text><path d="M262 262L302 262" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="262" cy="262" r="1.8" fill="#26405a"/><text class="cl r" x="306" y="265">Dạ dày</text><path d="M262 326L302 318" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="262" cy="326" r="1.8" fill="#26405a"/><text class="cl r" x="306" y="321">Tụy</text><path d="M268 380L302 350" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="268" cy="380" r="1.8" fill="#26405a"/><text class="cl r" x="306" y="353">Ruột già</text><path d="M210 480L302 486" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="210" cy="480" r="1.8" fill="#26405a"/><text class="cl r" x="306" y="489">Trực tràng</text><path d="M214 508L302 514" stroke="#7d97b1" stroke-width=".9" stroke-dasharray="2 2"/><circle cx="214" cy="508" r="1.8" fill="#26405a"/><text class="cl r" x="306" y="517">Hậu môn</text></g>
+ </svg>
+<div class="col">
+<div class="card" data-s="1" style="--c:var(--c1);--o:1" tabindex="0"><h3><span class="num">1</span>MIỆNG</h3><ul><li>Răng nghiền nhỏ thức ăn.</li><li>Nước bọt làm ẩm thức ăn.</li><li>Enzyme amylase bắt đầu phân giải tinh bột.</li></ul></div>
+<div class="card" data-s="2" style="--c:var(--c2);--o:2" tabindex="0"><h3><span class="num">2</span>HẦU VÀ THỰC QUẢN</h3><ul><li>Thức ăn đi qua hầu vào thực quản.</li><li>Nhu động thực quản đẩy thức ăn xuống dạ dày.</li></ul></div>
+<div class="card" data-s="3" style="--c:var(--c3);--o:3" tabindex="0"><h3><span class="num">3</span>DẠ DÀY</h3><ul><li>Co bóp và nhào trộn thức ăn.</li><li>Dịch vị và enzyme pepsin tham gia tiêu hóa protein.</li></ul></div>
+<div class="card" data-s="4" style="--c:var(--c4);--o:4" tabindex="0"><h3><span class="num" style="color:#4a3b00">4</span>RUỘT NON</h3><ul><li>Hoàn thành phần lớn quá trình tiêu hóa.</li><li>Hấp thụ phần lớn chất dinh dưỡng vào máu hoặc bạch huyết.</li><li>Chất dinh dưỡng được vận chuyển đến các tế bào.</li></ul></div>
+<div class="card" data-s="5" style="--c:var(--c5);--o:5" tabindex="0"><h3><span class="num">5</span>RUỘT GIÀ</h3><ul><li>Hấp thụ thêm nước và chất điện giải.</li><li>Hình thành phân.</li></ul></div>
+<div class="card" data-s="6" style="--c:var(--c6);--o:6" tabindex="0"><h3><span class="num">6</span>TRỰC TRÀNG VÀ HẬU MÔN</h3><ul><li>Trực tràng chứa phân tạm thời.</li><li>Hậu môn giúp thải phân ra ngoài.</li></ul></div>
+</div>
+</main>
+
+<nav class="flow" aria-label="Sơ đồ đường đi của thức ăn">
+ <button class="chip" data-s="1" style="--c:var(--c1)">MIỆNG</button><span class="ar">→</span>
+ <button class="chip" data-s="2" style="--c:var(--c2)">HẦU</button><span class="ar">→</span>
+ <button class="chip" data-s="2" style="--c:var(--c2)">THỰC QUẢN</button><span class="ar">→</span>
+ <button class="chip" data-s="3" style="--c:var(--c3)">DẠ DÀY</button><span class="ar">→</span>
+ <button class="chip" data-s="4" style="--c:var(--c4);color:#4a3b00">RUỘT NON</button><span class="ar">→</span>
+ <button class="chip" data-s="5" style="--c:var(--c5)">RUỘT GIÀ</button><span class="ar">→</span>
+ <button class="chip" data-s="6" style="--c:var(--c6)">TRỰC TRÀNG</button><span class="ar">→</span>
+ <button class="chip" data-s="6" style="--c:var(--c6)">HẬU MÔN</button>
+</nav>
+</div>
+
+<script>
+const D=[
+{n:"Miệng",t:"Răng nghiền nhỏ thức ăn, lưỡi đảo trộn cùng nước bọt rồi vo thành viên để nuốt.",f:[["Kiểu tiêu hóa","Cơ học + hóa học"],["Enzyme","Amylase trong nước bọt"],["Biến đổi","Tinh bột chín → đường mantôzơ"]]},
+{n:"Hầu và thực quản",t:"Nắp thanh quản đậy đường thở, viên thức ăn đi qua hầu; thực quản co thắt từng đợt đẩy xuống dạ dày.",f:[["Thực quản dài","≈ 25 cm"],["Cơ chế","Nhu động"],["Bảo vệ","Nắp thanh quản đậy đường thở"]]},
+{n:"Dạ dày",t:"Dạ dày co bóp nhào trộn thức ăn với dịch vị, protein bắt đầu được phân giải.",f:[["Dịch vị","Có axit HCl, pH rất thấp"],["Enzyme","Pepsin phân giải protein"],["Lưu lại","≈ 2–4 giờ"]]},
+{n:"Ruột non",t:"Mật, dịch tụy và dịch ruột hoàn tất tiêu hóa; nhung mao hấp thụ chất dinh dưỡng.",f:[["Chiều dài","≈ 6 m"],["Dịch tiêu hóa","Mật · dịch tụy · dịch ruột"],["Hấp thụ","Vào máu hoặc bạch huyết"]]},
+{n:"Ruột già",t:"Bã thức ăn bị hút bớt nước và chất điện giải, rồi đóng thành phân.",f:[["Chiều dài","≈ 1,5 m"],["Hấp thụ","Nước + chất điện giải"],["Vi khuẩn có ích","Tổng hợp một số vitamin"]]},
+{n:"Trực tràng và hậu môn",t:"Phân được chứa tạm thời ở trực tràng, rồi cơ thắt mở ra để thải phân ra ngoài.",f:[["Trực tràng","Chứa phân tạm thời"],["Hậu môn","Cơ thắt điều khiển thải phân"],["Kết thúc","Hết hành trình!"]]}];
+const DC=["#e5484d","#ee6f9b","#f59a2e","#e8b800","#a8683a","#7b61c9"];
+const cols=["#c0392b","#d6457b","#d9822b","#c9a000","#8a5530","#5d46a8"];
+const LP=[[170,64],[175,150],[205,272],[200,386],[228,390],[172,480]];
+const segs=[...document.querySelectorAll('.seg')],b=document.getElementById('bolus');
+const pl=segs.map(s=>s.getTotalLength()),durs=segs.map(s=>+s.dataset.d);
+const NS="http://www.w3.org/2000/svg",hist=[],DW=1.8;
+const tr=[...Array(7)].map(()=>{const c=document.createElementNS(NS,"circle");b.parentNode.insertBefore(c,b);return c});
+const pr=[...document.querySelectorAll("#prog i")];
+const zs=[...document.querySelectorAll(".zs")],zsvg=document.getElementById("zsvg"),ring=document.getElementById("ring"),zp=document.getElementById("zp");
+const still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+let i=0,t=0,last=performance.now();
+function showD(n){
+ const d=D[n];
+ zp.style.setProperty("--dc",DC[n]);
+ document.getElementById("dn").textContent=n+1;
+ document.getElementById("dh").textContent="Chặng "+(n+1)+": "+d.n;
+ document.getElementById("dp").textContent=d.t;
+ const f=document.getElementById("df");f.textContent="";
+ d.f.forEach(([a,c])=>{const e=document.createElement("span");e.className="ft";const sm=document.createElement("small");sm.textContent=a;const bb=document.createElement("b");bb.textContent=c;e.append(sm,bb);f.append(e)});
+ const zt=zp.querySelector(".zt");zt.style.animation="none";void zt.offsetWidth;zt.style.animation="";
+}
+function setStage(n){
+ document.body.dataset.s=n+1;
+ document.querySelectorAll(".card,.chip,.org").forEach(e=>e.classList.toggle("on",+e.dataset.s===n+1));
+ zs.forEach((e,j)=>e.classList.toggle("on",j===n));
+ b.setAttribute("fill",cols[n]);
+ ring.style.stroke=DC[n];ring.style.cx=LP[n][0]+"px";ring.style.cy=LP[n][1]+"px";
+ showD(n);
+ try{zsvg.setCurrentTime(0)}catch(e){}
+ try{const jw=document.getElementById("jw");if(n==0&&!still)jw.beginElement();else jw.endElement()}catch(e){}
+ document.getElementById("stm").firstElementChild.setAttribute("dur",n==2?"1.8s":"4.5s");
+}
+function go(n){i=n;t=-DW;hist.length=0;setStage(n)}
+function upd(x,y,r,k){
+ hist.unshift([x,y]);if(hist.length>40)hist.pop();
+ tr.forEach((c,j)=>{const h=hist[(j+1)*3]||hist[hist.length-1];c.setAttribute("cx",h[0]);c.setAttribute("cy",h[1]);c.setAttribute("r",Math.max(r-(j+1)*.6,.8));c.setAttribute("fill",cols[i]);c.setAttribute("opacity",(.4-j*.055).toFixed(2))});
+ b.setAttribute("cx",x);b.setAttribute("cy",y);b.setAttribute("r",r);
+ pr.forEach((e,j)=>e.style.setProperty("--f",j<i?1:j==i?k:0));
+}
+function frame(now){
+ const dt=Math.min((now-last)/1000,.1);last=now;
+ t+=dt;
+ if(t>=durs[i])go((i+1)%6);
+ const k=Math.max(0,Math.min(t/durs[i],1)),p=segs[i].getPointAtLength(k*pl[i]);
+ let x=p.x,y=p.y,r=5.5;
+ if(i==0){r=5+Math.sin(t*14)*1.6;x+=Math.sin(t*14)*1.2}
+ if(i==3)r=5.5-2*k;
+ if(i==4)r=3.8+k;
+ upd(x,y,r,k);
+ requestAnimationFrame(frame);
+}
+document.querySelectorAll(".card,.chip,.mk").forEach(e=>{
+ e.addEventListener("click",()=>go(+e.dataset.s-1));
+ e.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go(+e.dataset.s-1)}});
+});
+document.addEventListener("keydown",ev=>{
+ if(ev.key==="ArrowRight")go((i+1)%6);
+ else if(ev.key==="ArrowLeft")go((i+5)%6);
+ else if(ev.key==="f"||ev.key==="F")document.getElementById("fs").click();
+});
+document.getElementById("fs").onclick=()=>{try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(e){}};
+go(0);requestAnimationFrame(frame);
+</script>
+
+</body>
+</html>
