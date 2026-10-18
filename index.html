@@ -8,19 +8,19 @@
 <style>
 :root{--c1:#e5484d;--c2:#ee6f9b;--c3:#f59a2e;--c4:#e8b800;--c5:#a8683a;--c6:#7b61c9;--ink:#1d2b3a;color-scheme:light;box-sizing:border-box}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
+html,body{margin:0;height:100%;overflow:hidden}
 body{font-family:"Be Vietnam Pro",system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 50% 45%,#fff 0,#eaf3fa 60%,#d9e8f3 100%);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-.app{min-height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;padding:10px 22px 10px;gap:8px}
+.app{min-height:720.0px;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;padding:10px 22px 10px;gap:8px}
 header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-h1{margin:0;font-size:clamp(24px,4.4vh,44px);font-weight:800;line-height:1.1;background:linear-gradient(90deg,var(--c1),var(--c3),var(--c4),var(--c5),var(--c6));-webkit-background-clip:text;background-clip:text;color:transparent}
-header p{margin:2px 0 0;font-size:clamp(12px,2vh,18px);color:#4d6177}
+h1{margin:0;font-size:31.7px;font-weight:800;line-height:1.1;background:linear-gradient(90deg,var(--c1),var(--c3),var(--c4),var(--c5),var(--c6));-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{margin:2px 0 0;font-size:14.4px;color:#4d6177}
 .ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .ctrl button{font:inherit;font-weight:600;font-size:13px;border:0;border-radius:99px;padding:8px 14px;background:var(--ink);color:#fff;cursor:pointer}
 #st{font-weight:700;font-size:13px;padding:8px 14px;border-radius:99px;background:#fff;border:2px solid #cfdeea}
 button:focus-visible,.card:focus-visible{outline:3px solid #2b7de9;outline-offset:2px}
 main{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:18px;min-height:0;align-items:stretch}
 .col{display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;min-height:0}
-.card{--c:#999;background:#ffffffd9;backdrop-filter:blur(8px);animation:in .7s backwards;animation-delay:calc(var(--o)*.09s);border-radius:14px;border-left:7px solid var(--c);padding:10px 14px;box-shadow:0 2px 10px #1d2b3a1c;cursor:pointer;transition:transform .3s,box-shadow .3s;font-size:clamp(11px,1.75vh,15px)}
+.card{--c:#999;background:#ffffffd9;backdrop-filter:blur(8px);animation:in .7s backwards;animation-delay:calc(var(--o)*.09s);border-radius:14px;border-left:7px solid var(--c);padding:10px 14px;box-shadow:0 2px 10px #1d2b3a1c;cursor:pointer;transition:transform .3s,box-shadow .3s;font-size:12.6px}
 .card.on{transform:scale(1.04);box-shadow:0 8px 24px color-mix(in srgb,var(--c) 50%,transparent)}
 .card h3{margin:0 0 4px;font-size:1.08em;display:flex;gap:8px;align-items:center}
 .num{flex:none;width:1.9em;height:1.9em;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:800}
@@ -39,10 +39,10 @@ body[data-s="1"] .jaw{animation:ch .6s ease-in-out infinite}
 .nu{animation:nu 2s linear infinite}
 @keyframes nu{from{transform:translateY(8px);opacity:0}50%{opacity:1}to{transform:translateY(-14px);opacity:0}}
 .flow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px}
-.chip{--c:#999;border:0;font:inherit;font-weight:800;font-size:clamp(11px,1.8vh,15px);color:#fff;background:var(--c);padding:6px 12px;border-radius:10px;cursor:pointer;transition:transform .3s}
+.chip{--c:#999;border:0;font:inherit;font-weight:800;font-size:13.0px;color:#fff;background:var(--c);padding:6px 12px;border-radius:10px;cursor:pointer;transition:transform .3s}
 .chip.on{transform:scale(1.15);box-shadow:0 4px 12px #0003}
 .ar{font-weight:800;font-size:20px;color:#4d6177}
-.know{display:flex;gap:14px;align-items:center;background:#fff;border:2px dashed #9db6c9;border-radius:14px;padding:8px 16px;font-size:clamp(11px,1.8vh,15px)}
+.know{display:flex;gap:14px;align-items:center;background:#fff;border:2px dashed #9db6c9;border-radius:14px;padding:8px 16px;font-size:13.0px}
 .know b{font-size:1.1em;white-space:nowrap}
 .know ul{margin:0;padding:0;list-style:none;display:flex;gap:18px;flex-wrap:wrap}
 .know li::before{content:"✔ ";color:#2e9e5b}
@@ -59,13 +59,13 @@ svg.body{filter:drop-shadow(0 14px 24px #1d2b3a22)}
 .org.on[data-s="3"]{animation:ch2 1.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 .org.on[data-s="4"]{animation:ch3 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 @keyframes ch2{50%{transform:scale(1.05,.95)}}@keyframes ch3{50%{transform:scale(1.03,.98)}}
-main{min-height:min(62vh,540px)}
+main{min-height:min(446.4px,540px)}
 .sp{font-size:13px;font-weight:600;display:flex;gap:6px;align-items:center}.sp select{font:inherit;padding:6px 8px;border-radius:8px;border:2px solid #cfdeea;background:#fff}
 .detail{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;background:#ffffffe0;backdrop-filter:blur(8px);border-radius:16px;padding:8px 16px;box-shadow:0 2px 12px #1d2b3a1c;border-left:8px solid var(--dc,#e5484d);transition:border-color .6s}
 .dn{flex:none;width:44px;height:44px;border-radius:50%;background:var(--dc,#e5484d);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:800;transition:background .6s}
-.dtx{flex:1 1 280px;min-width:0}.dtx h2{margin:0;font-size:clamp(14px,2.4vh,20px)}.dtx p{margin:2px 0 0;font-size:clamp(11px,1.9vh,15px);color:#3d5166;line-height:1.35}
+.dtx{flex:1 1 280px;min-width:0}.dtx h2{margin:0;font-size:17.3px}.dtx p{margin:2px 0 0;font-size:13.7px;color:#3d5166;line-height:1.35}
 .dfs{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.ft{background:#f4f8fb;border:1.5px solid var(--dc);border-radius:10px;padding:4px 10px;font-size:clamp(10px,1.6vh,13px);line-height:1.25}
+.ft{background:#f4f8fb;border:1.5px solid var(--dc);border-radius:10px;padding:4px 10px;font-size:11.5px;line-height:1.25}
 .ft small{display:block;color:#5b7088;font-weight:600}.ft b{font-weight:700}
 .detail.sw .dtx,.detail.sw .dfs{animation:in .7s}
 .cl{font:600 9.5px "Be Vietnam Pro",sans-serif;fill:#26405a;text-anchor:end;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}.cl.r{text-anchor:start}
@@ -78,22 +78,22 @@ body[data-s="3"] .fx3,body[data-s="4"] .fx4,body[data-s="5"] .fx5{opacity:1}
 .lung{transform-box:fill-box;transform-origin:50% 100%;animation:br 4.5s ease-in-out infinite}
 @keyframes br{50%{transform:scale(1.035,1.05)}}
 .app{padding:6px 16px 8px;gap:6px}
-h1{font-size:clamp(20px,3.8vh,36px)}header p{font-size:clamp(11px,1.7vh,15px)}
+h1{font-size:27.4px}header p{font-size:12.2px}
 .ctrl button,#st{padding:6px 11px;font-size:12px}.sp{font-size:12px}
-main{grid-template-columns:minmax(150px,225px) auto minmax(150px,225px);justify-content:center;gap:14px;min-height:min(72vh,700px)}
-.card{padding:6px 10px;font-size:clamp(10px,1.4vh,12.5px);border-left-width:5px}.card h3{margin-bottom:2px}.card ul{line-height:1.3}
+main{grid-template-columns:minmax(150px,225px) auto minmax(150px,225px);justify-content:center;gap:14px;min-height:min(518.4px,700px)}
+.card{padding:6px 10px;font-size:10.1px;border-left-width:5px}.card h3{margin-bottom:2px}.card ul{line-height:1.3}
 .detail{padding:5px 12px;gap:6px 12px}.dn{width:34px;height:34px;font-size:17px}
-.dtx h2{font-size:clamp(12px,1.9vh,16px)}.dtx p{font-size:clamp(10px,1.5vh,13px);margin:0}
-.ft{padding:3px 8px;font-size:clamp(9px,1.3vh,12px)}
-.chip{padding:4px 9px;font-size:clamp(10px,1.4vh,13px)}.ar{font-size:15px}
+.dtx h2{font-size:13.7px}.dtx p{font-size:10.8px;margin:0}
+.ft{padding:3px 8px;font-size:9.4px}
+.chip{padding:4px 9px;font-size:10.1px}.ar{font-size:15px}
 @media(prefers-reduced-motion:reduce){.beat,.lung{animation:none!important}}
 .zoom{display:flex;flex-direction:column;gap:8px;background:#ffffffe0;backdrop-filter:blur(8px);border-radius:18px;padding:12px;box-shadow:0 4px 18px #1d2b3a22;border-top:6px solid var(--dc,#e5484d);min-height:0;overflow:auto;transition:border-color .6s}
-main{grid-template-columns:minmax(270px,380px) auto minmax(250px,350px);gap:18px;min-height:min(80vh,800px)}
-.zring{width:min(100%,38vh);aspect-ratio:1;margin:0 auto;flex:none}.zring svg{width:100%;height:100%;display:block}
-.zh{display:flex;gap:10px;align-items:center}.zh h2{margin:0;font-size:clamp(15px,2.4vh,21px)}
-.zt p{margin:6px 0;font-size:clamp(12px,1.85vh,16px);line-height:1.45;color:#33475c}
+main{grid-template-columns:minmax(270px,380px) auto minmax(250px,350px);gap:18px;min-height:min(576.0px,800px)}
+.zring{width:min(100%,273.6px);aspect-ratio:1;margin:0 auto;flex:none}.zring svg{width:100%;height:100%;display:block}
+.zh{display:flex;gap:10px;align-items:center}.zh h2{margin:0;font-size:17.3px}
+.zt p{margin:6px 0;font-size:13.3px;line-height:1.45;color:#33475c}
 .zt .dfs{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:6px}
-.zt .ft{font-size:clamp(11px,1.65vh,14px);padding:5px 10px}
+.zt .ft{font-size:11.9px;padding:5px 10px}
 .dn{width:36px;height:36px;font-size:18px}
 .zt{animation:in .7s}
 .zs{opacity:0;visibility:hidden;transition:opacity .6s,visibility 0s .6s;transform-origin:150px 150px}
@@ -103,16 +103,18 @@ main{grid-template-columns:minmax(270px,380px) auto minmax(250px,350px);gap:18px
 #ring{transition:cx .9s ease,cy .9s ease,stroke .5s;transform-box:fill-box;transform-origin:center;animation:spin 6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .col{justify-content:space-between;gap:8px}
-.card{font-size:clamp(12px,1.8vh,16px);padding:8px 12px;border-left-width:6px}
+.card{font-size:13.0px;padding:8px 12px;border-left-width:6px}
 .card h3{margin-bottom:3px}
 .ctrl button{padding:8px 16px;font-size:13px}
-@media(max-width:900px){main{min-height:0}.zoom{order:-1}.zring{width:min(80vw,340px)}
- html,body{height:auto}.app{height:auto}
- main{grid-template-columns:1fr}.col{display:contents}
- svg.body{height:auto;width:min(100%,380px);margin:0 auto}
- .card{order:var(--o)}svg.body{order:0}
-}
+
 @media(prefers-reduced-motion:reduce){.org.on,.jaw,.dr,.nu{animation:none!important}}
+
+.app{position:fixed;left:50%;top:50%;width:1280px;height:720px;min-height:0;padding:6px 16px 8px;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center center}
+main{min-height:0;grid-template-columns:minmax(300px,400px) auto minmax(280px,390px);justify-content:center}
+.col,.zoom{min-height:0}.zoom{overflow:hidden}
+.zt p{font-size:13.5px}
+#rot{position:fixed;left:8px;right:8px;bottom:8px;z-index:9;background:#1d2b3a;color:#fff;border-radius:12px;padding:10px 14px;font:600 13px "Be Vietnam Pro",system-ui,sans-serif;text-align:center}
+#rot[hidden]{display:none}
 </style>
 </head>
 <body data-s="1">
@@ -140,7 +142,7 @@ main{grid-template-columns:minmax(270px,380px) auto minmax(250px,350px);gap:18px
   <path d="M12 38Q58 24 104 38V50Q58 42 12 50Z" fill="#d95f74"/>
   <g fill="#fff" stroke="#d6cfc8" stroke-width=".8"><rect x="22" y="48" width="9.5" height="18" rx="3"/><rect x="32" y="48" width="9.5" height="18" rx="3"/><rect x="42" y="48" width="9.5" height="18" rx="3"/><rect x="52" y="48" width="9.5" height="18" rx="3"/><rect x="62" y="48" width="9.5" height="18" rx="3"/><rect x="72" y="48" width="9.5" height="18" rx="3"/><rect x="82" y="48" width="9.5" height="18" rx="3"/></g>
   <g fill="#4aa3e0"><circle class="dr" cx="36" cy="84" r="2.4"/><circle class="dr" style="animation-delay:.5s" cx="82" cy="86" r="2.4"/><circle class="dr" style="animation-delay:1s" cx="58" cy="80" r="2"/></g>
- </g></g><text class="zl" x="150" y="286">Răng · lưỡi · nước bọt</text></g>
+ </g></g><text class="zl" x="150" y="264">Răng · lưỡi · nước bọt</text></g>
 <g class="zs" data-s="2"><rect width="300" height="300" fill="#fde7ee"/>
 <rect x="70" y="96" width="36" height="204" rx="12" fill="#d6ebf7" stroke="#8ebbd6" stroke-width="3"/>
 <path d="M72 120h32M72 144h32M72 168h32M72 192h32M72 216h32M72 240h32M72 264h32" stroke="#8ebbd6" stroke-width="3"/>
@@ -149,7 +151,7 @@ main{grid-template-columns:minmax(270px,380px) auto minmax(250px,350px);gap:18px
 <g><path d="M106 92L100 52Q113 46 119 62L118 94Z" fill="#f08aa8" stroke="#c2456f" stroke-width="2"><animateTransform attributeName="transform" type="rotate" values="0 106 94;-82 106 94;-82 106 94;0 106 94;0 106 94" keyTimes="0;.15;.5;.65;1" dur="5s" repeatCount="indefinite"/></path></g>
 <ellipse rx="26" ry="19" fill="#b9824f" stroke="#7a4a24" stroke-width="2"><animateMotion dur="5s" repeatCount="indefinite" path="M190 26L200 96L199 130L199 282"/></ellipse>
 <rect x="154" y="-16" width="90" height="16" rx="8" fill="#9d2f5b"><animateTransform attributeName="transform" type="translate" values="0 100;0 112;0 250" keyTimes="0;.35;1" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;.8;.8;0" keyTimes="0;.33;.4;.95;1" dur="5s" repeatCount="indefinite"/></rect>
-<text class="zl" x="196" y="44">Hầu</text><text class="zl" x="88" y="84" style="font-size:11px">Nắp thanh quản</text><text class="zl" x="88" y="292" style="font-size:11px">Khí quản</text><text class="zl" x="270" y="196" style="font-size:11px;text-anchor:end">Thực quản</text></g>
+<text class="zl" x="196" y="44">Hầu</text><text class="zl" x="88" y="84" style="font-size:11px">Nắp thanh quản</text><text class="zl" x="88" y="238" style="font-size:11px">Khí quản</text><text class="zl" x="270" y="196" style="font-size:11px;text-anchor:end">Thực quản</text></g>
 <g class="zs" data-s="3"><rect width="300" height="300" fill="#fff0de"/>
 <defs><radialGradient id="zS" cx="35%" cy="25%" r="90%"><stop offset="0" stop-color="#ffd9b0"/><stop offset=".6" stop-color="#f5955a"/><stop offset="1" stop-color="#d9622f"/></radialGradient></defs>
 <path d="M70 72C110 36 200 44 240 102C278 158 250 244 184 262C142 274 112 256 114 226C116 198 152 192 152 168C152 140 96 132 70 100Z" fill="url(#zS)" stroke="#c4561f" stroke-width="5"><animate attributeName="d" dur="2.6s" repeatCount="indefinite" values="M70 72C110 36 200 44 240 102C278 158 250 244 184 262C142 274 112 256 114 226C116 198 152 192 152 168C152 140 96 132 70 100Z;M78 80C112 50 192 56 230 108C262 160 238 232 182 250C148 260 124 246 126 226C128 204 158 198 158 172C158 148 108 140 78 108Z;M70 72C110 36 200 44 240 102C278 158 250 244 184 262C142 274 112 256 114 226C116 198 152 192 152 168C152 140 96 132 70 100Z" keyTimes="0;.5;1" calcMode="spline" keySplines=".4 0 .6 1;.4 0 .6 1"/></path>
@@ -157,7 +159,7 @@ main{grid-template-columns:minmax(270px,380px) auto minmax(250px,350px);gap:18px
 <path d="M104 78Q150 70 200 100M92 100Q150 96 226 140M110 160Q170 150 240 190M130 220Q170 210 200 236" stroke="#fff" stroke-width="3" fill="none" opacity=".35" stroke-linecap="round"/>
 <circle r="14" fill="#a8683a"><animateMotion dur="4.2s" repeatCount="indefinite" path="M160 120m-38 0a38 22 0 1 0 76 0a38 22 0 1 0 -76 0"/><animate attributeName="r" values="14;7.0;14" dur="7s" repeatCount="indefinite"/></circle><circle r="11" fill="#c28a52"><animateMotion dur="3.4s" repeatCount="indefinite" path="M175 175m-34 0a34 20 0 1 0 68 0a34 20 0 1 0 -68 0"/><animate attributeName="r" values="11;5.5;11" dur="7s" repeatCount="indefinite"/></circle><circle r="9" fill="#8a5530"><animateMotion dur="3s" repeatCount="indefinite" path="M190 110m-26 0a26 16 0 1 0 52 0a26 16 0 1 0 -52 0"/><animate attributeName="r" values="9;4.5;9" dur="7s" repeatCount="indefinite"/></circle><circle r="12" fill="#b9824f"><animateMotion dur="5s" repeatCount="indefinite" path="M200 210m-30 0a30 16 0 1 0 60 0a30 16 0 1 0 -60 0"/><animate attributeName="r" values="12;6.0;12" dur="7s" repeatCount="indefinite"/></circle><circle class="bub" style="animation-delay:0s" cx="110" cy="80" r="4.5" fill="#d9f24a"/><circle class="bub" style="animation-delay:0.5s" cx="215" cy="130" r="4.5" fill="#d9f24a"/><circle class="bub" style="animation-delay:1.1s" cx="235" cy="170" r="4.5" fill="#d9f24a"/><circle class="bub" style="animation-delay:1.6s" cx="165" cy="230" r="4.5" fill="#d9f24a"/><circle class="bub" style="animation-delay:0.8s" cx="130" cy="110" r="4.5" fill="#d9f24a"/><circle class="bub" style="animation-delay:1.9s" cx="200" cy="90" r="4.5" fill="#d9f24a"/>
 <path d="M138 120l10-8 8 8 10-8 8 8" stroke="#7b3fa0" stroke-width="3" fill="none"/><path d="M200 196l8-8 8 8 8-8 8 8" stroke="#7b3fa0" stroke-width="3" fill="none"/>
-<text class="zl" x="150" y="288">Dịch vị: HCl + pepsin</text></g>
+<text class="zl" x="150" y="34">Dịch vị: HCl + pepsin</text></g>
 <g class="zs" data-s="4"><rect width="300" height="300" fill="#fff3c9"/><circle cx="30" cy="70" r="5" fill="#c98e3a"><animate attributeName="cx" values="30;58;30" dur="6s" repeatCount="indefinite"/></circle><circle cx="90" cy="52" r="5" fill="#c98e3a"><animate attributeName="cx" values="90;70;90" dur="6s" repeatCount="indefinite"/></circle><circle cx="150" cy="64" r="5" fill="#c98e3a"><animate attributeName="cx" values="150;174;150" dur="6s" repeatCount="indefinite"/></circle><circle cx="210" cy="50" r="5" fill="#c98e3a"><animate attributeName="cx" values="210;184;210" dur="6s" repeatCount="indefinite"/></circle><circle cx="270" cy="72" r="5" fill="#c98e3a"><animate attributeName="cx" values="270;290;270" dur="6s" repeatCount="indefinite"/></circle><circle cx="120" cy="180" r="5" fill="#c98e3a"><animate attributeName="cx" values="120;102;120" dur="6s" repeatCount="indefinite"/></circle><circle cx="228" cy="170" r="5" fill="#c98e3a"><animate attributeName="cx" values="228;250;228" dur="6s" repeatCount="indefinite"/></circle>
 <rect y="250" width="300" height="60" fill="#f0b45a"/><path d="M0 264H300" stroke="#d98f2b" stroke-width="3" stroke-dasharray="14 4"/>
 <g transform="translate(54,252)"><g><animateTransform attributeName="transform" type="skewX" values="0;-4;0;4;0" dur="3.6s" begin="0s" repeatCount="indefinite"/>
@@ -187,7 +189,7 @@ main{grid-template-columns:minmax(270px,380px) auto minmax(250px,350px);gap:18px
 <path d="M-10 204Q30 248 70 204T150 204T230 204T310 204" fill="none" stroke="#a8683a" stroke-width="34"/><path d="M-10 204Q30 248 70 204T150 204T230 204T310 204" fill="none" stroke="#c98e5c" stroke-width="22"/>
 <g><animateTransform attributeName="transform" type="translate" values="-40 0;40 0;-40 0" dur="9s" repeatCount="indefinite"/>
 <rect x="80" y="128" width="140" height="44" rx="22" fill="#d8a85a"><animate attributeName="fill" values="#d8a85a;#8a5a2e;#d8a85a" dur="9s" repeatCount="indefinite"/></rect><path d="M110 140q20-8 40 0M160 158q18 6 36-2" stroke="#fff" stroke-width="3" opacity=".3" fill="none"/></g>
-<g transform="translate(70,128)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="4s" repeatCount="indefinite"/></rect></g><g transform="translate(120,172)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="5s" repeatCount="indefinite"/></rect></g><g transform="translate(232,134)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="3.5s" repeatCount="indefinite"/></rect></g><g transform="translate(190,176)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="4.5s" repeatCount="indefinite"/></rect></g><g transform="translate(262,170)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="6s" repeatCount="indefinite"/></rect></g><g transform="translate(44,172)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="3s" repeatCount="indefinite"/></rect></g><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0s" repeatCount="indefinite" path="M80 140 L80 86"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0.5s" repeatCount="indefinite" path="M140 140 L140 84"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0.5s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="1s" repeatCount="indefinite" path="M200 140 L200 86"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="1s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="1.5s" repeatCount="indefinite" path="M250 140 L250 84"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="1.5s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0.8s" repeatCount="indefinite" path="M110 162 L110 214"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0.8s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M180 162 L180 216"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="1.3s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0.2s" repeatCount="indefinite" path="M240 162 L240 214"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0.2s" repeatCount="indefinite"/></circle><text class="zl" x="150" y="150" style="font-size:11px;fill:#fff;stroke:#7a4a24">Phân đang hình thành</text><text class="zl" x="150" y="286" style="font-size:11px">Nước ↑ · vi khuẩn có ích</text></g>
+<g transform="translate(70,128)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="4s" repeatCount="indefinite"/></rect></g><g transform="translate(120,172)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="5s" repeatCount="indefinite"/></rect></g><g transform="translate(232,134)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="3.5s" repeatCount="indefinite"/></rect></g><g transform="translate(190,176)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="4.5s" repeatCount="indefinite"/></rect></g><g transform="translate(262,170)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="6s" repeatCount="indefinite"/></rect></g><g transform="translate(44,172)"><rect x="-7" y="-2.5" width="14" height="5" rx="2.5" fill="#5fae5b"><animateTransform attributeName="transform" type="rotate" values="0;360" dur="3s" repeatCount="indefinite"/></rect></g><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0s" repeatCount="indefinite" path="M80 140 L80 86"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0.5s" repeatCount="indefinite" path="M140 140 L140 84"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0.5s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="1s" repeatCount="indefinite" path="M200 140 L200 86"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="1s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="1.5s" repeatCount="indefinite" path="M250 140 L250 84"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="1.5s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0.8s" repeatCount="indefinite" path="M110 162 L110 214"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0.8s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M180 162 L180 216"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="1.3s" repeatCount="indefinite"/></circle><circle r="4.5" fill="#4aa3e0"><animateMotion dur="2.6s" begin="0.2s" repeatCount="indefinite" path="M240 162 L240 214"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.2;.7;1" dur="2.6s" begin="0.2s" repeatCount="indefinite"/></circle><text class="zl" x="150" y="150" style="font-size:11px;fill:#fff;stroke:#7a4a24">Phân đang hình thành</text><text class="zl" x="150" y="266" style="font-size:11px">Nước ↑ · vi khuẩn có ích</text></g>
 <g class="zs" data-s="6"><rect width="300" height="300" fill="#efe9fb"/>
 <path d="M100 -10Q64 70 86 140L100 210H200L214 140Q236 70 200 -10Z" fill="#b8a5ee" stroke="#6247b8" stroke-width="4"/>
 <path d="M116 -10Q90 70 106 140L116 210H184L194 140Q210 70 184 -10Z" fill="#d8cdf8"/>
@@ -195,7 +197,7 @@ main{grid-template-columns:minmax(270px,380px) auto minmax(250px,350px);gap:18px
 <rect x="96" y="210" width="108" height="16" rx="8" fill="#6247b8"><animate attributeName="x" values="96;96;80;80;96" keyTimes="0;.45;.58;.78;1" dur="6s" repeatCount="indefinite"/><animate attributeName="width" values="108;108;140;140;108" keyTimes="0;.45;.58;.78;1" dur="6s" repeatCount="indefinite"/></rect>
 <rect x="100" y="234" width="100" height="14" rx="7" fill="#8a6fe0"><animate attributeName="x" values="100;100;86;86;100" keyTimes="0;.5;.62;.8;1" dur="6s" repeatCount="indefinite"/><animate attributeName="width" values="100;100;128;128;100" keyTimes="0;.5;.62;.8;1" dur="6s" repeatCount="indefinite"/></rect>
 <ellipse rx="30" ry="22" fill="#7a4a24" stroke="#4d2c12" stroke-width="2"><animateMotion dur="6s" repeatCount="indefinite" keyTimes="0;.3;.55;.75;1" keyPoints="0;.2;.5;.8;1" calcMode="linear" path="M150 60L150 190L150 240L150 300"/><animate attributeName="opacity" values="1;1;1;1;0" keyTimes="0;.3;.75;.9;1" dur="6s" repeatCount="indefinite"/></ellipse>
-<text class="zl" x="22" y="118" style="text-anchor:start;font-size:11px">Trực tràng</text><text class="zl" x="212" y="236" style="text-anchor:start;font-size:11px">Cơ thắt</text><text class="zl" x="150" y="288" style="font-size:11px">Hậu môn</text></g>
+<text class="zl" x="22" y="118" style="text-anchor:start;font-size:11px">Trực tràng</text><text class="zl" x="212" y="236" style="text-anchor:start;font-size:11px">Cơ thắt</text><text class="zl" x="150" y="280" style="font-size:11px">Hậu môn</text></g>
  </g>
  <circle cx="150" cy="150" r="142" fill="none" style="stroke:var(--dc,#e5484d)" stroke-width="8"/>
  </svg></div>
@@ -338,6 +340,7 @@ main{grid-template-columns:minmax(270px,380px) auto minmax(250px,350px);gap:18px
 </nav>
 </div>
 
+<div id="rot" hidden>🔄 Xoay ngang điện thoại để xem rõ hơn (chạm để ẩn)</div>
 <script>
 const D=[
 {n:"Miệng",t:"Răng nghiền nhỏ thức ăn, lưỡi đảo trộn cùng nước bọt rồi vo thành viên để nuốt.",f:[["Kiểu tiêu hóa","Cơ học + hóa học"],["Enzyme","Amylase trong nước bọt"],["Biến đổi","Tinh bột chín → đường mantôzơ"]]},
@@ -406,7 +409,11 @@ document.addEventListener("keydown",ev=>{
  else if(ev.key==="ArrowLeft")go((i+5)%6);
  else if(ev.key==="f"||ev.key==="F")document.getElementById("fs").click();
 });
-document.getElementById("fs").onclick=()=>{try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(e){}};
+document.getElementById("fs").onclick=()=>{try{if(document.fullscreenElement){document.exitFullscreen()}else{document.documentElement.requestFullscreen().then(()=>{try{screen.orientation.lock("landscape")}catch(e){}}).catch(()=>{})}}catch(e){}};
+const app=document.querySelector(".app"),rot=document.getElementById("rot");let rotOff=false;
+rot.onclick=()=>{rotOff=true;rot.hidden=true};
+function fit(){app.style.setProperty("--s",Math.min(innerWidth/1280,innerHeight/720));rot.hidden=rotOff||!(innerHeight>innerWidth)}
+addEventListener("resize",fit);addEventListener("orientationchange",fit);fit();
 go(0);requestAnimationFrame(frame);
 </script>
 
